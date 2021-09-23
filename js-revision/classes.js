@@ -24,3 +24,22 @@ function Square() {}
 //console.log(Square, Rectangle);
 
 const r = new Rectangle();
+
+class Pig {
+	property = "my property";
+	constructor(mood = "happy") {
+		this.mood = mood;
+	}
+
+	speak() {
+		console.log(`I'm a ${this.mood} pig.`);
+	}
+}
+
+const happy = new Pig("happy");
+console.log(happy);
+//happy.speak()
+const sad = new Pig("sad");
+//sad.speak()
+const noMood = new Pig();
+//noMood.speak()
