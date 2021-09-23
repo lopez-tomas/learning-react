@@ -11,12 +11,45 @@ import reportWebVitals from './reportWebVitals';
   //document.getElementById('root')
 //);
 
-// <p>hello world</p>
+const Li = ({ children, mood, age, sex, home }) => {
+  console.log(age, home);
+
+  let pronoun;
+  if (sex.toLowerCase() == 'm') {
+    pronoun = 'He';
+  } else {
+    pronoun = 'She';
+  }
+  
+  return (
+    <li>{ children } is { mood }. { pronoun } has { age } years old.</li>
+  )
+}
+
 const X = () => // Functional component
   <ul>
-    <li></li>
-    <li></li>
-    <li></li>
+    <Li 
+      mood={ "happy" }
+      age={ 24 }
+      sex={ 'm' }
+      home={ true }
+    >
+      Pig A
+    </Li>
+    <Li 
+      mood={ "sad" }
+      age={ 33 }
+      sex={ 'f' }
+      mood={ false }
+    >
+      Pig B
+    </Li>
+    <Li
+      mood={ "excited" }
+      sex={ 'm' }
+    >
+      Felipe
+    </Li>
   </ul>
 
 ReactDOM.render(
