@@ -1,4 +1,4 @@
-const arr = [5, 1, 2, 3, 4]
+const arr = [-5, -1, -2, -3, -4]
 
 // Filter method
 // It returns the same or minor length of the original array if the function we are passing to this method returns a TRUE value.
@@ -22,4 +22,24 @@ const users = [
 ]
 
 const mapped = users.map((user, i) => `<h1>${user.name}</h1>`);
-console.log(mapped);
+//console.log(mapped);
+
+// Reduce method
+// It will take all the elements inside an array and we can returns whatever we want.
+ 
+//const r1 = arr.reduce((acc, el) => acc + el, 0);
+
+//const getMax = (a, b) => Math.max(a, b);
+//const r1 = arr.reduce(getMax);
+
+//const r1 = users.reduce((acc, el) => 
+	//`${acc === "" ? "" : `${acc}, `}${el.name}`, "");
+
+const r1 = users.reduce((acc, el) => {
+	if (el.id < 2) {
+		return acc;
+	}
+	return acc.concat(el);
+}, [])
+
+console.log(r1);
