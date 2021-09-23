@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import './main.css';
 
 const style2 = {
   boxShadow: '0 5px 3px rgba(0,0,0,0.5)'
@@ -14,14 +15,14 @@ const style = ({ bg = '#222' }) => ({
 
 const Li = ({ children }) => {
   return (
-    <li style={{ ...style2, ...style({ bg: '#333' }) }} className="li-class">{ children }</li>
+    <li className="li-class">{ children }</li>
   )
 };
 
 const App = () => {
   const mood = "Sad";
   return (
-    <ul style={ style({ bg: '#750' }) } className="css-class">
+    <ul className="css-class">
       <Li mood="Happy">li value</Li>
     </ul>
   );
