@@ -11,9 +11,7 @@ class App extends Component {
       { name: 'Peas', price: 2500, img: '/products/peas.jpg' },
       { name: 'Lettuce', price: 500, img: '/products/lettuce.jpg' },
     ],
-    cart: [
-      //{ name: 'Tomato', price: 1500, img: '/products/tomato.jpg', amount: 1 },
-    ],
+    cart: [],
   }
 
   add_to_cart = (product) => {
@@ -36,10 +34,9 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.cart)
     return (
       <div>
-        <Navbar />
+        <Navbar cart={this.state.cart}/>
         <Layout>
           <Title />
           <Products

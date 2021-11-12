@@ -19,10 +19,14 @@ const styles = {
 
 class Cart extends Component {
 	render() {
+		const { cart } = this.props
+		const amount = cart.reduce((acc, el) => acc + el.amount, 0)
 		return (
 			<div>
 				<span style={styles.bubble}>
-					<BubbleAlert value={9}/>
+					{amount !== 0
+						? <BubbleAlert value={amount}/>
+						: null}
 				</span>
 				<button style={styles.cart}>
 					Cart
