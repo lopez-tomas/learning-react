@@ -1,6 +1,5 @@
 import { Component } from 'react'
-//import logo from './logo.svg';
-import './App.css';
+import Products from './components/Products'
 
 class App extends Component {
   state = {
@@ -13,7 +12,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>Hello, World!</p>
+        <Products
+          add_to_cart={() => console.log('It does nothing')}
+          products={this.state.products}
+        />
       </div>
     )
   }
