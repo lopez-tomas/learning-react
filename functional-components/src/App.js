@@ -1,20 +1,19 @@
-// impure functions
-const impure = () => new Date().toLocaleString();
-console.log(impure())
+import { useState } from 'react'
 
-const MyComponent = ({ my_property }) => {
-  //const { my_property } = props; // the other way
-  return (
-    <div>
-      Name: {my_property}
-    </div>
-  )
-}
-
+// Hooks' rules:
+// 1) They can't be called on conditions nor loops. Always at the higher level of the component.
+// 2) They are only call on 2 sides:
+// 2-a) React components
+// 2-b) Custom hooks
+// 3) When we create a Custom Hook, it must always start with use*(* being hook name)
 const App = () => {
-  return (
-    <MyComponent my_property={'lalala'}/>
-  )
+	const [counter, set_counter] = useState(0)
+	return (
+		<div>
+			Counter: {counter}
+			<button onClick={() => set_counter(counter + 1)}>Increment</button>
+		</div>
+	)
 }
 
 export default App
