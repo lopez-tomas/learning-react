@@ -11,10 +11,14 @@ class Button extends Component {
 		console.log('componentDidMount');
 	}
 
+	componentDidUpdate(prevProp, prevState) {
+		console.log('componentDidUpdate', prevProp, prevState);
+	}
+
 	render() {
 		console.log('running render method of button');
 		return (
-			<button>
+			<button onClick={() => this.setState({ prop: 1 })}>
 				Send	
 			</button>
 		)
