@@ -1,6 +1,16 @@
 import { Component } from 'react'
 
 class Button extends Component {
+	state = {}
+	constructor(props) {
+		super(props)
+		console.log('constructor', props);
+	}
+
+	componentDidMount() {
+		console.log('componentDidMount');
+	}
+
 	render() {
 		console.log('running render method of button');
 		return (
@@ -20,7 +30,7 @@ class App extends Component { // we must extend 'Component' to use 'setState'
 		return (
 			<div>
 				<p>Hello, World!</p>
-				<Button/>
+				<Button piggy="happy"/>
 				<button 
 					className={`${this.state.value}`} 
 					onClick={() => this.setState({  value: 2 })} // refresh 'state'
