@@ -1,60 +1,36 @@
-import { Component, useState, useEffect } from 'react'
+import { useReducer, useState } from 'react'
 
-const useCounter = (initial) => {
-	const [counter, set_counter] = useState(initial)
+// const state = { counter: 0 }
+// action = { type: string, payload: any }
+const initial = { counter: 0 }
 
-	const increment = () => {
-	  set_counter(counter + 1)
-	}
-
-	const decrement = () => {
-		if (counter !== 0) {
-	  	set_counter(counter - 1)
-		}
-	}
-
-	return [counter, increment, decrement]
-}
-
-//const Interval = ({ counter }) => {
-	//useEffect(() => {
-		//const i = setInterval(() => console.log(counter), 1000)
-		//return () => clearInterval(i) 
-	//}, [counter])
-
-	//return (
-		//<p>Interval</p>
-	//)
-//}
-
-class Interval extends Component {
-	interval = ''
-	componentDidMount() {
-		this.interval = setInterval(() => console.log(this.props.counter), 1000)
-	}
-	componentWillUnmount() {
-		clearInterval(this.interval)
-	}
-
-	render() {
-		return (
-			<p>Interval</p>
-		)
+const reducer = (state, action) => {
+	switch(action.type) {
+		case 'increment':
+			return { counter: state.counter + 1 }
+		case 'decrement':
+			if (state.counter !== 0) {
+				return { counter: state.counter - 1 }
+			}
+			return state
+		case 'set':
+			return { counter: action.payload }
+		default:
+			return state
 	}
 }
 
 const App = () => {
-	const [counter, increment, decrement] = useCounter(0)
-	useEffect(() => {
-		document.title = counter
-	}, [counter])
+	const [state, dispatch] = useReducer(reducer, initial)
+	const [value, set_value] = useState(0)
 
 	return (
 		<div>
-			Counter: {counter}
-			<button onClick={increment}>Increment</button>
-			<button onClick={decrement}>Decrement</button>
-			<Interval counter={counter}/>
+			Counter: {state.counter}
+			<input value={value} onChange={e => set_value(Number(e.target.value))}/>
+			<button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
+			<button onClick={() => dispatch({ type: 'decrement' })}>Decrement</button>
+			<button onClick={() => dispatch({ type: 'set', payload: value })}>Set</button>
 		</div>
 	)
 }
