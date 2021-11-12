@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+// impure functions
+const impure = () => new Date().toLocaleString();
+console.log(impure())
 
-function App() {
+const MyComponent = ({ my_property }) => {
+  //const { my_property } = props; // the other way
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Name: {my_property}
     </div>
-  );
+  )
 }
 
-export default App;
+const App = () => {
+  return (
+    <MyComponent my_property={'lalala'}/>
+  )
+}
+
+export default App
