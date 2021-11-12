@@ -15,6 +15,10 @@ class Button extends Component {
 		console.log('componentDidUpdate', prevProp, prevState);
 	}
 
+	componentWillUnmount() {
+		console.log('componentWillUnmount', this.props, this.state);
+	}
+
 	render() {
 		console.log('running render method of button');
 		return (
@@ -34,7 +38,9 @@ class App extends Component { // we must extend 'Component' to use 'setState'
 		return (
 			<div>
 				<p>Hello, World!</p>
-				<Button piggy="happy"/>
+				{this.state.value === 3
+					? <Button piggy="happy"/>
+					: null}
 				<button 
 					className={`${this.state.value}`} 
 					onClick={() => this.setState({  value: 2 })} // refresh 'state'
