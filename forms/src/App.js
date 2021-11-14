@@ -1,7 +1,14 @@
 import { useState } from 'react'
 
 const App = () => {
-	const [value, setValue] = useState({ normal: '' , text: '', select: '', check: false})
+	const [value, setValue] = useState({
+		normal: '', 
+		text: '',
+		select: '',
+		check: false,
+		state: 'happy'
+	})
+
 	const handleChange = ({ target }) => {
 		// 1st solution to maintain state object
 		setValue((state) => ({
@@ -36,6 +43,31 @@ const App = () => {
 				checked={value.check}
 				onChange={handleChange}
 			/>
+
+			<div>
+				<label>Pig</label>
+				<input 
+					onChange={handleChange} 
+					type="radio" 
+					name="state" 
+					value="happy" 
+					checked={value.state === "happy"}
+				/> Happy
+				<input 
+					onChange={handleChange} 
+					type="radio" 
+					name="state" 
+					value="sad"
+					checked={value.state === "sad"}
+				/> Sad
+				<input 
+					onChange={handleChange} 
+					type="radio" 
+					name="state" 
+					value="felipe"
+					checked={value.state === "felipe"}
+				/> Felipe
+			</div>
 		</div>
 	)
 }
