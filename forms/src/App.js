@@ -1,15 +1,17 @@
 import { useState } from 'react'
 
 const App = () => {
-	const [value, setValue] = useState({ normal: '' , text: '', select: ''})
-	const handleChange = (e) => {
+	const [value, setValue] = useState({ normal: '' , text: '', select: '', check: false})
+	const handleChange = ({ target }) => {
 		// 1st solution to maintain state object
 		setValue((state) => ({
 			...state,
-			[e.target.name]: e.target.value
+			[target.name]: target.type === "checkbox" 
+			  ? target.checked 
+			  : target.value
 		}))
 		// 2nd solution to maintain state object
-		//setValue({ 
+	  //setValue({ 
 			//...value,
 			//[e.target.name]: e.target.value 
 		//})
@@ -28,6 +30,12 @@ const App = () => {
 				<option value="sad-piggy">Sad Piggy</option>
 				<option value="felipe">Felipe</option>
 			</select>
+			<input
+				type="checkbox"
+				name="check"
+				checked={value.check}
+				onChange={handleChange}
+			/>
 		</div>
 	)
 }
