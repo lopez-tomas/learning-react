@@ -1,22 +1,18 @@
-function App() {
-  const submit = (e) => {
-    e.preventDefault()
-    const data = Array.from(new FormData(e.target))
-    console.log(Object.fromEntries(data))
-  };
-  return (
-    <form onSubmit={submit}>
-      <div>
-        <span>
-          lala
-        </span>
-        <input name="field" />
-      </div>
-			<input name="field-2" />
-      <input type="file" name="file" />
-      <input type="submit" value="Send"/>
-    </form>
-  )
+import { useState } from 'react'
+
+const App = () => {
+	const [value, setValue] = useState('')
+	const handleChange = (e) => {
+	  setValue(e.target.value)
+	}
+	console.log(value)
+
+	return (
+		<div>
+			{value.length < 5 ? <span>Minimun length is 5</span> : null}
+			<input type="text" name="normal" value={value} onChange={handleChange} />
+		</div>
+	)
 }
 
 export default App
