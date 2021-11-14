@@ -12,7 +12,7 @@ function App() {
         </span>
         <input name="field" />
       </div>
-      <input name="field-2" />
+      <input type="file" name="file" />
       <input type="submit" value="Send"/>
     </form>
   )
