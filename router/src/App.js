@@ -1,21 +1,34 @@
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useMatch, useParams } from 'react-router-dom'
+
+const Project = () => {
+	const match = useMatch("/portfolio/:id")
+	const params = useParams()
+	const { id } = match.params
+
+	console.log({ match, params })
+	return (
+		<h2>Project {id}</h2>
+	)
+};
 
 const Portfolio = () => {
+	const match = useMatch("/portfolio")
+	console.log({ match })
+
 	return (
 		<div>
 			<h1>Portfolio</h1>
 			<ul>
 				<li>
-					<Link to={'/portfolio/project-1'}>Project 1</Link>
+					<Link to={`${match.url}/project-1`}>Project 1</Link>
 				</li>
 				<li>
-					<Link to={'/portfolio/project-2'}>Project 2</Link>
+					<Link to={`${match.url}/project-2`}>Project 2</Link>
 				</li>
 			</ul>
 			<div>
 				<Routes>
-					<Route path="project-1" element={<h2>Project 1</h2>} />
-					<Route path="project-2" element={<h2>Project 2</h2>} />
+					<Route path=":id" element={<Project />} />
 				</Routes>
 			</div>
 		</div>
