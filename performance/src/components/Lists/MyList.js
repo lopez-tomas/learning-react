@@ -1,11 +1,13 @@
-const Li = ({ fullname }) => {
+import { memo } from 'react'
+
+const Li = memo(({ fullname }) => {
   console.log(`rendering ${fullname}`)
   return (
     <li>
       {fullname}
     </li>
   )
-}
+})
 
 const MyList = ({ data }) => {
   console.log('rendering list')
