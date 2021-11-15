@@ -1,37 +1,51 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, memo, useCallback } from 'react'
 
-const Context = createContext({ value: false, toggle: () => {} })
+const Context = createContext()
 
-const Provider = ({ children }) => {
-	const [value, setValue] = useState(false)
-	const val = {
-		value,
-		toggle: () => setValue(!value),
-	}
+const CounterProvider = ({ children }) => {
+	const [counter, setCount] = useState(0)
+
+	const increment = useCallback(() => setCount(x => x + 1), [])
+	const decrement = useCallback(() => setCount(x => x - 1), [])
 
 	return (
-		<Context.Provider value={val}>
+		<Context.Provider value={{counter, increment, decrement}}>
 			{children}
 		</Context.Provider>
 	)
 }
 
-const Component = () => {
-	const { value, toggle } = useContext(Context)
-
+const Increment = memo(() => {
+	console.log('increment')
+	const { increment } = useContext(Context)
 	return (
-		<div>
-			<label>{value.toString()}</label>
-			<button onClick={toggle}>Toggle</button>
-		</div>
+		<button onClick={increment}>Increment</button>
+	)
+})
+
+const Decrement = memo(() => {
+	console.log('decrement')
+	const { decrement } = useContext(Context)
+	return (
+		<button onClick={decrement}>Decrement</button>
+	)
+})
+
+const Label = () => {
+	console.log('Label')
+	const { counter } = useContext(Context)
+	return (
+		<h1>{counter}</h1>
 	)
 }
 
 const App = () => {
 	return (
-		<Provider>
-			<Component />
-		</Provider>
+		<CounterProvider>
+			<Label />
+			<Increment />
+			<Decrement />
+		</CounterProvider>
 	)
 }
 
