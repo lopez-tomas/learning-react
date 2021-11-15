@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import TextInput from './components/TextInput'
 import Checkbox from './components/Checkbox'
+import Select from './components/Select'
 
 const validate = (values) => {
   const errors = {}
@@ -23,7 +24,7 @@ const validate = (values) => {
 function App() {
   return (
 		<Formik
-			initialValues={{name: '', last_name: '', email: '', select: ''}}
+			initialValues={{name: '', last_name: '', email: '', select: '', pig: ''}}
 			validate={validate}
 			onSubmit={values => console.log(values)}
 		>
@@ -36,22 +37,26 @@ function App() {
 					<option value="sad_piggy">Sad piggy</option>
 				</Field>
 				<ErrorMessage name="select" />
-				<br />
 				*/}
-
-				<label>Last name</label>
-				<Field name="last_name" type="text" />
-				<ErrorMessage name="last_name" />
 				<br />
 
-				<label>Email</label>
-				<Field name="email" type="email" />
-				<ErrorMessage name="email" />
+				<TextInput name="last_name" label="Last name" />
 				<br />
+
+				<TextInput name="email" label="Email" />
+				<br />
+
+				<Select name="pig" label="Pig type">
+					<option value="">-- Select pig --</option>
+					<option value="felipe">Felipe</option>
+					<option value="happy_piggy">Happy piggy</option>
+					<option value="sad_piggy">Sad piggy</option>
+				</Select>
 
 				<Checkbox name="accept">
 					Accept terms and conditions
 				</Checkbox>
+				<br />
 
 				<button type="submit">Send</button>
 			</Form>
