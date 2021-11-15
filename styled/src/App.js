@@ -39,7 +39,7 @@ const App = () => {
       <Button>Send</Button>
       <br />
       <Button primary>Send</Button>
-      <BlockButton primary>Send</BlockButton>
+      <BlockButton primary as="a" href="#">Send</BlockButton>
     </Content>
   )
 }
