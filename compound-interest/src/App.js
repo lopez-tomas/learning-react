@@ -50,7 +50,7 @@ const App = () => {
             <Input name="contribution" label="Anual contribution" />
             <Input name="years" label="Years" />
             <Input name="rate" label="Estimated interest" />
-            <Button>Calculate</Button>
+            <Button type="submit">Calculate</Button>
           </Form>
         </Formik>
         {balance !== ''
