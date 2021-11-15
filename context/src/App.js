@@ -1,51 +1,36 @@
-import { createContext, useContext, useState, memo, useCallback } from 'react'
+import { Component, createContext } from 'react'
 
-const Context = createContext()
+const Context = createContext('my value')
 
-const CounterProvider = ({ children }) => {
-	const [counter, setCount] = useState(0)
-
-	const increment = useCallback(() => setCount(x => x + 1), [])
-	const decrement = useCallback(() => setCount(x => x - 1), [])
-
+const Provider = ({ children }) => {
 	return (
-		<Context.Provider value={{counter, increment, decrement}}>
+		<Context.Provider value="other value">
 			{children}
 		</Context.Provider>
 	)
 }
 
-const Increment = memo(() => {
-	console.log('increment')
-	const { increment } = useContext(Context)
-	return (
-		<button onClick={increment}>Increment</button>
-	)
-})
+class TestComponent extends Component {
+	//static contextType = Context
 
-const Decrement = memo(() => {
-	console.log('decrement')
-	const { decrement } = useContext(Context)
-	return (
-		<button onClick={decrement}>Decrement</button>
-	)
-})
-
-const Label = () => {
-	console.log('Label')
-	const { counter } = useContext(Context)
-	return (
-		<h1>{counter}</h1>
-	)
+	render() {
+		console.log(this.context)
+		return (
+			<div>Hello, World!</div>
+		)
+	}
 }
+
+TestComponent.contextType = Context // It's the same as line 14
 
 const App = () => {
 	return (
-		<CounterProvider>
-			<Label />
-			<Increment />
-			<Decrement />
-		</CounterProvider>
+		<Provider>
+			<TestComponent />		
+			<Context.Consumer>
+				{value => <div>{value}</div>}
+			</Context.Consumer>
+		</Provider>
 	)
 }
 
