@@ -58,6 +58,21 @@ const StyledLink = styled(Link)`
   color: blue;
 `
 
+const Input = styled.input.attrs(props => ({
+  type: 'text',
+  color: props.color || 'red',
+
+}))`
+  font-size: 20px;
+  border: 1px solid red;
+  color: ${props => props.color};
+`
+
+const Password = styled(Input).attrs({
+  type: 'password',
+})`
+`
+
 /* We must NEVER define an styled component inside a render method
    or functional component. They must always be defined outside. 
 */
@@ -74,6 +89,8 @@ const App = () => {
       <BlockButton primary>Send</BlockButton>
       <Link>Link</Link>
       <StyledLink>Styled Link</StyledLink>
+      <Input color="blue"/>
+      <Password />
     </Content>
   )
 }
