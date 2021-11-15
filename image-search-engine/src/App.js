@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
+
+// Styles
 import './header.css'
+import './content.css'
+import './article.css'
 
 const App = () => {
   const [photos, setPhotos] = useState([])
