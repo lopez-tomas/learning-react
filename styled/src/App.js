@@ -19,6 +19,7 @@ const Content = styled.div`
 */
 
 const Button = styled.button`
+  transition: box-shadow 0.2s ease;
   background-color: ${props => props.primary ? 'red' : 'white'};
   color: ${props => props.primary ? 'white' : 'red'};
   padding: 10px 15px;
@@ -26,6 +27,23 @@ const Button = styled.button`
   border-radius: 4px;
   font-weight: 700;
   font-size: 18px;
+
+  &:hover {
+    background-color: ${props => props.primary ? 'orange' : 'black'};
+    color: ${props => props.primary ? 'black' : 'orange'};
+    border: solid 2px ${props => props.primary ? 'black' : 'orange'};
+    box-shadow: 1px 2px 5px rgb(0, 0, 0, 0.3);
+  }
+
+  &.secondary {
+    background-color: blue;
+    color: white;
+    border: solid 2px blue;
+  }
+
+  .info {
+    font-size: 28px;
+  }
 `
 const BlockButton = styled(Button)`
   width: 100%;
@@ -48,9 +66,10 @@ const App = () => {
   return (
     <Content>
       <P>Hello, I'm a paragraph.</P>
-      <Button>Send</Button>
+      <Button>Send<p className="info">Info</p></Button>
       <br />
       <Button primary>Send</Button>
+      <Button className="secondary">Send</Button>
       <BlockButton primary as="a" href="#">Send</BlockButton>
       <BlockButton primary>Send</BlockButton>
       <Link>Link</Link>
