@@ -4,6 +4,7 @@ import './header.css'
 
 const App = () => {
   const [photos, setPhotos] = useState([])
+  const open = (url) => window.open(url)
   console.log({ photos })
 
   return (
@@ -27,6 +28,15 @@ const App = () => {
           </Form>
         </Formik>
       </header>
+      <div className="container">
+        <div className="center">
+          {photos.map(photo =>
+          <article key={photo.id} onClick={() => open(photo.links.html)}>
+            <img src={photo.urls.regular}/>
+            <p>{[photo.description, photo.atl_description].join(' - ')}</p>
+          </article>)}
+        </div>
+      </div>
     </div>
   )
 }
