@@ -9,6 +9,16 @@ const Content = styled.div`
   padding: 20px 25px;
 `
 
+const Button = styled.button`
+  background-color: ${props => props.primary ? 'red' : 'white'};
+  color: ${props => props.primary ? 'white' : 'red'};
+  padding: 10px 15px;
+  border: solid 2px red;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 18px;
+`
+
 /* Creating component without Styled Components:
   const Content = (props) => {
   return <div style={{ padding: '20px 25px' }} {...props} />
@@ -22,6 +32,9 @@ const App = () => {
   return (
     <Content>
       <P>Hello, I'm a paragraph.</P>
+      <Button>Send</Button>
+      <br />
+      <Button primary>Send</Button>
     </Content>
   )
 }
