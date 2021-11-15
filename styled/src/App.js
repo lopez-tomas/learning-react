@@ -9,6 +9,15 @@ const Content = styled.div`
   padding: 20px 25px;
 `
 
+/* Creating component without Styled Components:
+  const Content = (props) => {
+  return <div style={{ padding: '20px 25px' }} {...props} />
+}
+*/
+/* Styled Components is a library to give a better development 
+   experience for developers.
+*/
+
 const Button = styled.button`
   background-color: ${props => props.primary ? 'red' : 'white'};
   color: ${props => props.primary ? 'white' : 'red'};
@@ -23,15 +32,6 @@ const BlockButton = styled(Button)`
   font-size: 24px;
 `
 
-/* Creating component without Styled Components:
-  const Content = (props) => {
-  return <div style={{ padding: '20px 25px' }} {...props} />
-}
-*/
-/* Styled Components is a library to give a better development 
-   experience for developers.
-*/
-
 const Link = ({ className, ...props }) => {
   return <a className={className} {...props}></a>
 }
@@ -39,6 +39,10 @@ const Link = ({ className, ...props }) => {
 const StyledLink = styled(Link)`
   color: blue;
 `
+
+/* We must NEVER define an styled component inside a render method
+   or functional component. They must always be defined outside. 
+*/
 
 const App = () => {
   return (
