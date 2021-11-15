@@ -21,14 +21,22 @@ const validate = (values) => {
 function App() {
   return (
 		<Formik
-			initialValues={{name: '', last_name: '', email: '',}}
+			initialValues={{name: '', last_name: '', email: '', select: ''}}
 			validate={validate}
 			onSubmit={values => console.log(values)}
 		>
 			<Form>
 				<label>Name</label>
-				<Field name="name" type="text" />
+				<Field name="name" type="text" className="input" />
 				<ErrorMessage name="name" />
+				<br />
+
+				<Field name="select" as="select" className="input">
+					<option value="">-- Select --</option>
+					<option value="happy_piggy">Happy piggy</option>
+					<option value="sad_piggy">Sad piggy</option>
+				</Field>
+				<ErrorMessage name="select" />
 				<br />
 
 				<label>Last name</label>
