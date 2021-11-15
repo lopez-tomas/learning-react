@@ -1,5 +1,5 @@
 const Li = ({ fullname }) => {
-  console.log(`renderizando ${fullname}`)
+  console.log(`rendering ${fullname}`)
   return (
     <li>
       {fullname}
@@ -8,7 +8,7 @@ const Li = ({ fullname }) => {
 }
 
 const MyList = ({ data }) => {
-  console.log('renderizando lista')
+  console.log('rendering list')
   return (
     <ul>
       {data.map(x =>
