@@ -1,4 +1,4 @@
-import { createContext, Component } from 'react'
+import { createContext, Component, useContext } from 'react'
 
 const Context1 = createContext('my first context')
 const Context2 = createContext('my second context')
@@ -28,10 +28,21 @@ class TestComponent extends Component {
 	}
 }
 
+const Component2 = () => {
+	const value1 = useContext(Context1)
+	const value2 = useContext(Context2)
+
+	return (
+		<div>{`${value1} ${value2}`}</div>
+	)
+}
+
 const App = () => {
 	return (
 		<Provider>
-			<TestComponent />
+			<span>Class Component</span><TestComponent />
+			<br />
+			<span>Functional Component</span><Component2 />
 		</Provider>
 	)
 }
