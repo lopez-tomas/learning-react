@@ -32,6 +32,14 @@ const BlockButton = styled(Button)`
    experience for developers.
 */
 
+const Link = ({ className, ...props }) => {
+  return <a className={className} {...props}></a>
+}
+
+const StyledLink = styled(Link)`
+  color: blue;
+`
+
 const App = () => {
   return (
     <Content>
@@ -40,6 +48,9 @@ const App = () => {
       <br />
       <Button primary>Send</Button>
       <BlockButton primary as="a" href="#">Send</BlockButton>
+      <BlockButton primary>Send</BlockButton>
+      <Link>Link</Link>
+      <StyledLink>Styled Link</StyledLink>
     </Content>
   )
 }
