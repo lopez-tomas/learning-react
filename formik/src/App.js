@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import TextInput from './components/TextInput'
 import Checkbox from './components/Checkbox'
+import Radio from './components/Radio'
 import Select from './components/Select'
 
 const validate = (values) => {
@@ -18,13 +19,26 @@ const validate = (values) => {
     errors.last_name = 'The last name is too short.'
   }
 
+	if(!values.radio) {
+		errors.radio = 'Required'
+	}
+
   return errors
 }
 
 function App() {
   return (
 		<Formik
-			initialValues={{name: '', last_name: '', email: '', select: '', pig: ''}}
+			initialValues={
+				{
+					name: '',
+					last_name: '',
+					email: '',
+					select: '',
+					pig: '',
+					radio: ''
+				}
+			}
 			validate={validate}
 			onSubmit={values => console.log(values)}
 		>
@@ -56,6 +70,12 @@ function App() {
 				<Checkbox name="accept">
 					Accept terms and conditions
 				</Checkbox>
+				<br />
+
+				<Radio name="radio" value="piggy1" label="Piggy 1"/>
+				<Radio name="radio" value="piggy2" label="Piggy 2"/>
+				<Radio name="radio" value="piggy3" label="Piggy 3"/>
+				<ErrorMessage name="radio" />
 				<br />
 
 				<button type="submit">Send</button>
