@@ -12,7 +12,7 @@ const Project = () => {
 };
 
 const Portfolio = () => {
-	const match = useMatch("/portfolio")
+	const match = useMatch("/portfolio/*")
 	console.log({ match })
 
 	return (
@@ -20,15 +20,15 @@ const Portfolio = () => {
 			<h1>Portfolio</h1>
 			<ul>
 				<li>
-					<Link to={`${match.url}/project-1`}>Project 1</Link>
+					<Link to={`${match.pathnameBase}/project-1`}>Project 1</Link>
 				</li>
 				<li>
-					<Link to={`${match.url}/project-2`}>Project 2</Link>
+					<Link to={`${match.pathnameBase}/project-2`}>Project 2</Link>
 				</li>
 			</ul>
 			<div>
 				<Routes>
-					<Route path=":id" element={<Project />} />
+					<Route path={":id"} element={<Project />} />
 				</Routes>
 			</div>
 		</div>
