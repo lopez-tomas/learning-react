@@ -18,6 +18,10 @@ const Button = styled.button`
   font-weight: 700;
   font-size: 18px;
 `
+const BlockButton = styled(Button)`
+  width: 100%;
+  font-size: 24px;
+`
 
 /* Creating component without Styled Components:
   const Content = (props) => {
@@ -35,6 +39,7 @@ const App = () => {
       <Button>Send</Button>
       <br />
       <Button primary>Send</Button>
+      <BlockButton primary>Send</BlockButton>
     </Content>
   )
 }
