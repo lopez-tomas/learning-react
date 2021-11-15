@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const P = styled.p`
   font-size: 24px;
@@ -73,6 +73,21 @@ const Password = styled(Input).attrs({
 })`
 `
 
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+const Rotate = styled.div`
+  display: inline-block;
+  animation: ${spin} 2s linear infinite;
+`
+
 /* We must NEVER define an styled component inside a render method
    or functional component. They must always be defined outside. 
 */
@@ -91,6 +106,8 @@ const App = () => {
       <StyledLink>Styled Link</StyledLink>
       <Input color="blue"/>
       <Password />
+      <br />
+      <Rotate>I'm spinning</Rotate>
     </Content>
   )
 }
