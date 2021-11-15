@@ -1,37 +1,40 @@
-import { Component, createContext } from 'react'
+import { createContext, Component } from 'react'
 
-const Context = createContext('my value')
+const Context1 = createContext('my first context')
+const Context2 = createContext('my second context')
 
 const Provider = ({ children }) => {
 	return (
-		<Context.Provider value="other value">
-			{children}
-		</Context.Provider>
+		<Context1.Provider value="value 1">
+			<Context2.Provider value="value 2">
+				{children}
+			</Context2.Provider>
+		</Context1.Provider>
 	)
 }
 
 class TestComponent extends Component {
-	//static contextType = Context
-
 	render() {
-		console.log(this.context)
 		return (
-			<div>Hello, World!</div>
+			<Context1.Consumer>
+				{
+					value1 =>
+						<Context2.Consumer>
+							{value2 => <div>{`${value1} ${value2}`}</div>}
+						</Context2.Consumer>
+				}
+			</Context1.Consumer>
 		)
 	}
 }
 
-TestComponent.contextType = Context // It's the same as line 14
-
 const App = () => {
 	return (
 		<Provider>
-			<TestComponent />		
-			<Context.Consumer>
-				{value => <div>{value}</div>}
-			</Context.Consumer>
+			<TestComponent />
 		</Provider>
 	)
 }
 
 export default App
+
