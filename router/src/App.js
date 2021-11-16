@@ -1,8 +1,14 @@
-import { Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
 
 const App = () => {
-	let navigate = useNavigate()
-	//console.log(navigate)
+	const query = useQuery()
+	const piggy = query.get('piggy')
+	const name = query.get('name')
+	console.log({ piggy, name })
 
   return (
     <div>
@@ -17,9 +23,6 @@ const App = () => {
         </ul>
       </nav>
       <section>
-				<button onClick={() => navigate(-1)}>Go back</button>
-				<button onClick={() => navigate(1)}>Go forward</button>
-				<button onClick={() => navigate("/happy-piggy")}>Push</button>
         <Routes>
           <Route path="/" element={<h1>Home</h1>} />
           <Route path="/perfil" element={<h1>Perfil</h1>} />
