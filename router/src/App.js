@@ -1,11 +1,9 @@
-import { Routes, Route, Link, useMatch, useParams } from 'react-router-dom'
+import { Routes, Route, NavLink, useMatch, useLocation } from 'react-router-dom'
 
 const Project = () => {
 	const match = useMatch("/portfolio/:id")
-	const params = useParams()
 	const { id } = match.params
 
-	console.log({ match, params })
 	return (
 		<h2>Project {id}</h2>
 	)
@@ -13,17 +11,24 @@ const Project = () => {
 
 const Portfolio = () => {
 	const match = useMatch("/portfolio/*")
-	console.log({ match })
 
 	return (
 		<div>
 			<h1>Portfolio</h1>
 			<ul>
 				<li>
-					<Link to={`${match.pathnameBase}/project-1`}>Project 1</Link>
+					<NavLink
+						style={({ isActive }) => ({
+							color: isActive ? 'green' : 'blue' })
+						}
+						end 
+						to={`${match.pathnameBase}/project-1`}>Project 1</NavLink>
 				</li>
 				<li>
-					<Link to={`${match.pathnameBase}/project-2`}>Project 2</Link>
+					<NavLink 
+						style={{ fontSize: 20 }}
+						end
+						to={`${match.pathnameBase}/project-2`}>Project 2</NavLink>
 				</li>
 			</ul>
 			<div>
@@ -36,15 +41,26 @@ const Portfolio = () => {
 }
 
 const App = () => {
+	const match = useMatch("/*")
+	const location = useLocation()
+	let isActive = {match, location}
   return (
     <div>
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink end to="/">Home</NavLink>
           </li>
           <li>
-            <Link to="/portfolio">Portfolio</Link>
+						<NavLink
+							style={( { isActive } ) => (
+								isActive
+									? console.log(match, location)
+									: null
+							)}
+							className={ isActive ? 'active' : '' }
+							end
+							to="/portfolio">Portfolio</NavLink>
           </li>
         </ul>
       </nav>
