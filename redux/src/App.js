@@ -11,13 +11,32 @@ export const reducer = (state = initialState, action) => {
 				entities: state.entities.concat({ ...action.payload })
 			}
 		}
+		case 'to-do/completed': {
+			const new_to_dos = state.entities.map(to_do => {
+				if (to_do.id === action.payload.id) {
+					return { ...to_do, completed: true }
+				}
+
+				return to_do
+			})
+			return {
+				...state,
+				entities: new_to_dos
+			}
+		}
+		default:
+			return state;
 	}
-	return state;
 }
 
 const ToDoItem = ({ to_do }) => {
+	const dispatch = useDispatch()
+
 	return (
-		<li>{to_do.title}</li>
+		<li
+			style={{ textDecoration: to_do.completed ? 'line-through' : 'none' }}
+			onClick={() => dispatch({ type: 'to-do/completed', payload: to_do })}
+		>{to_do.title}</li>
 	)
 }
 
