@@ -10,7 +10,7 @@ const store = createStore((state = 0, action) => { // it's a reducer!
   return state
 })
 
-console.log({ store })
+console.log(store.getState())
 
 ReactDOM.render(
   <React.StrictMode>
