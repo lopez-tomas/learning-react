@@ -6,10 +6,18 @@ import reportWebVitals from './reportWebVitals';
 
 const store = createStore((state = 0, action) => { // it's a reducer!
   // action = { type: 'action type', payload: any }
-  console.log({ state, action })
-  return state
+  switch (action.type) {
+    case 'action': {
+      return action.payload
+    }
+    default:
+      return state
+  }
 })
 
+//console.log(store.getState())
+store.dispatch({ type: 'action', payload: 2 })
+store.dispatch({ type: 'undefined_action', payload: 15 })
 console.log(store.getState())
 
 ReactDOM.render(
