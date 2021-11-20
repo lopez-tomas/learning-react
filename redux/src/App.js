@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 const initialState = {
 	entities: [],
+	filter: 'all', // completed || uncompleted
 }
 export const reducer = (state = initialState, action) => {
 	switch(action.type) {
@@ -24,9 +25,29 @@ export const reducer = (state = initialState, action) => {
 				entities: new_to_dos
 			}
 		}
+		case 'filter/set': {
+			return {
+				...state,
+				filter: action.payload,
+			}
+		}
 		default:
 			return state;
 	}
+}
+
+const selectToDos = state => {
+	const { entities, filter } = state
+
+	if (filter === 'completed') {
+		return entities.filter(to_do => to_do.completed)
+	}
+
+	if (filter === 'uncompleted') {
+		return entities.filter(to_do => !to_do.completed)
+	}
+
+	return entities
 }
 
 const ToDoItem = ({ to_do }) => {
@@ -43,7 +64,7 @@ const ToDoItem = ({ to_do }) => {
 const App = () => {
 	const [value, setValue] = useState('')
 	const dispatch = useDispatch()
-	const state = useSelector(x => x)
+	const to_dos = useSelector(selectToDos)
 
 	const submit = e => {
 		e.preventDefault()
@@ -61,11 +82,11 @@ const App = () => {
 			<form onSubmit={submit}>
 				<input value={value} onChange={e => setValue(e.target.value)}/>
 			</form>
-			<button>Show TO-DOs</button>
-			<button>Completed</button>
-			<button>Uncompleted</button>
+			<button onClick={() => dispatch({ type: 'filter/set', payload: 'all' })}>Show TO-DOs</button>
+			<button onClick={() => dispatch({ type: 'filter/set', payload: 'completed' })}>Completed</button>
+			<button onClick={() => dispatch({ type: 'filter/set', payload: 'uncompleted' })}>Uncompleted</button>
 			<ul>
-				{state.entities.map(to_do => <ToDoItem key={to_do.id} to_do={to_do} />)}
+				{to_dos.map(to_do => <ToDoItem key={to_do.id} to_do={to_do} />)}
 			</ul>
 		</div>
 	)
