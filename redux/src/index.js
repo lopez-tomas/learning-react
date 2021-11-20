@@ -4,10 +4,16 @@ import { createStore } from 'redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// action = { type: 'action type', payload: any }
 const store = createStore((state = 0, action) => { // it's a reducer!
-  // action = { type: 'action type', payload: any }
   switch (action.type) {
-    case 'action': {
+    case 'increment': {
+      return state + 1
+    }
+    case 'decrement': {
+      return state - 1
+    }
+    case 'set': {
       return action.payload
     }
     default:
@@ -15,10 +21,16 @@ const store = createStore((state = 0, action) => { // it's a reducer!
   }
 })
 
-//console.log(store.getState())
-store.dispatch({ type: 'action', payload: 2 })
-store.dispatch({ type: 'undefined_action', payload: 15 })
-console.log(store.getState())
+console.log('Initial state: ' + store.getState())
+store.dispatch({ type: 'lala' })
+console.log('Lala action: ' + store.getState())
+store.dispatch({ type: 'increment' })
+console.log('Increment action: ' + store.getState())
+store.dispatch({ type: 'decrement' })
+console.log('Decrement action: ' + store.getState())
+store.dispatch({ type: 'set', payload: 15 })
+console.log('Set action: ' + store.getState())
+
 
 ReactDOM.render(
   <React.StrictMode>
