@@ -2,6 +2,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { combineReducers } from 'redux'
 import { useState } from 'react'
 
+export const asyncMiddleware = store => next => action => {
+	if (typeof action === 'function') {
+		return action(store.dispatch, store.getState)
+	}
+	return next(action)
+}
+
+export const fetchThunk = () => dispatch => {
+	console.log("I'm a THUNK.", dispatch)
+}
+
 export const toDosReducer = (state = [], action) => {
 	switch(action.type) {
 		case 'to-do/add': {
@@ -35,38 +46,6 @@ export const reducer = combineReducers({
 	entities: toDosReducer,
 	filter: filterReducer,
 })
-
-//export const reducer = (state = initialState, action) => {
-	//switch(action.type) {
-		//case 'to-do/add': {
-			//return {
-				//...state,
-				//entities: state.entities.concat({ ...action.payload })
-			//}
-		//}
-		//case 'to-do/completed': {
-			//const new_to_dos = state.entities.map(to_do => {
-				//if (to_do.id === action.payload.id) {
-					//return { ...to_do, completed: true }
-				//}
-
-				//return to_do
-			//})
-			//return {
-				//...state,
-				//entities: new_to_dos
-			//}
-		//}
-		//case 'filter/set': {
-			//return {
-				//...state,
-				//filter: action.payload,
-			//}
-		//}
-		//default:
-			//return state;
-	//}
-//}
 
 const selectToDos = state => {
 	const { entities, filter } = state
@@ -117,6 +96,7 @@ const App = () => {
 			<button onClick={() => dispatch({ type: 'filter/set', payload: 'all' })}>Show TO-DOs</button>
 			<button onClick={() => dispatch({ type: 'filter/set', payload: 'completed' })}>Completed</button>
 			<button onClick={() => dispatch({ type: 'filter/set', payload: 'uncompleted' })}>Uncompleted</button>
+			<button onClick={() => dispatch(fetchThunk())}>Fetch</button>
 			<ul>
 				{to_dos.map(to_do => <ToDoItem key={to_do.id} to_do={to_do} />)}
 			</ul>
