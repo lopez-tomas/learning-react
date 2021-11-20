@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { createStore } from 'redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+const store = createStore((state = 0, action) => { // it's a reducer!
+  // action = { type: 'action type', payload: any }
+  console.log({ state, action })
+  return state
+})
+
+console.log({ store })
 
 ReactDOM.render(
   <React.StrictMode>
