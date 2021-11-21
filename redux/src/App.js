@@ -53,13 +53,33 @@ export const filterReducer = (state = 'all', action) => {
 	}
 }
 
+const initialFetching = { loading: 'idle', error: null }
+export const fetchingReducer = (state = initialFetching, action) => {
+	switch(action.type) {
+		case 'to-dos/pending': {
+			return { ...state, loading: 'pending' }
+		}
+		case 'to-dos/fulfilled': {
+			return { ...state, loading: 'succeeded' }
+		}
+		case 'to-dos/error': {
+			return { error: action.error, loading: 'rejected' }
+		}
+		default:
+			return state
+	}
+}
+
 export const reducer = combineReducers({
-	entities: toDosReducer,
+	to_dos: combineReducers({
+		entities: toDosReducer,
+		status: fetchingReducer,
+	}),
 	filter: filterReducer,
 })
 
 const selectToDos = state => {
-	const { entities, filter } = state
+	const { to_dos: { entities }, filter } = state
 
 	if (filter === 'completed') {
 		return entities.filter(to_do => to_do.completed)
@@ -71,6 +91,8 @@ const selectToDos = state => {
 
 	return entities
 }
+
+const selectStatus = state => state.to_dos.status
 
 const ToDoItem = ({ to_do }) => {
 	const dispatch = useDispatch()
@@ -86,7 +108,9 @@ const ToDoItem = ({ to_do }) => {
 const App = () => {
 	const [value, setValue] = useState('')
 	const dispatch = useDispatch()
+
 	const to_dos = useSelector(selectToDos)
+	const status = useSelector(selectStatus)
 
 	const submit = e => {
 		e.preventDefault()
@@ -97,6 +121,14 @@ const App = () => {
 		const to_do = { title: value, completed: false, id }
 		dispatch({ type: 'to-do/add', payload: to_do })
 		setValue('')
+	}
+
+	if (status.loading === 'pending') {
+		return <p>Loading...</p>
+	}
+
+	if (status.loading === 'rejected') {
+		return <p>{status.error}</p>
 	}
 
 	return (
