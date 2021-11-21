@@ -1,22 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { fetchThunk, setComplete, setFilter } from './features/todos'
-
-const selectToDos = state => {
-	const { to_dos: { entities }, filter } = state
-
-	if (filter === 'completed') {
-		return entities.filter(to_do => to_do.completed)
-	}
-
-	if (filter === 'uncompleted') {
-		return entities.filter(to_do => !to_do.completed)
-	}
-
-	return entities
-}
-
-const selectStatus = state => state.to_dos.status
+import { fetchThunk, setComplete, setFilter, selectToDos, selectStatus } from './features/todos'
 
 const ToDoItem = ({ to_do }) => {
 	const dispatch = useDispatch()
