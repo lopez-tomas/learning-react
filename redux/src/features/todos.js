@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux'
-import { makeFetchingReducer, makeSetReducer, reduceReducers, makeCrudReducer } from './utils'
+import { mac, makeFetchingReducer, makeSetReducer, reduceReducers, makeCrudReducer } from './utils'
+
+export const setPending = mac('to-dos/pending')
+export const setFulfilled = mac('to-dos/fulfilled', 'payload')
+export const setError = mac('to-dos/error', 'error')
+export const setComplete = mac('to-do/completed', 'payload')
+export const setFilter = mac('filter/set', 'payload')
 
 export const fetchThunk = () => async dispatch => {
 	dispatch(setPending())
@@ -9,24 +15,9 @@ export const fetchThunk = () => async dispatch => {
 		const to_dos = data.slice(0, 10)
 		dispatch(setFulfilled(to_dos))
 	} catch(e) {
-		dispatch(setError())
+		dispatch(setError(e.message))
 	}
 }
-
-export const setPending = () => {
-	return {
-		type: 'to-dos/pending'
-	}
-}
-
-export const setFulfilled = payload => ({ type: 'to-dos/fulfilled', payload })
-
-export const setError = e => ({ type: 'to-dos/error', error: e.message })
-
-export const setComplete = payload => ({ type: 'to-do/completed', payload })
-
-export const setFilter = payload => ({ type: 'to-do/set', payload })
-
 
 const fulfilledReducer = makeSetReducer(['to-dos/fulfilled'])
 const crudReducer = makeCrudReducer(['to-do/add', 'to-do/completed'])
@@ -53,11 +44,11 @@ export const selectToDos = state => {
 	const { to_dos: { entities }, filter } = state
 
 	if (filter === 'completed') {
-		return entities.filter(entities => entities.completed)
+		return entities.filter(to_do => to_do.completed)
 	}
 
 	if (filter === 'uncompleted') {
-		return entities.filter(entities => !entities.completed)
+		return entities.filter(to_do => !to_do.completed)
 	}
 
 	return entities
