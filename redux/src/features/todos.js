@@ -53,11 +53,11 @@ export const selectToDos = state => {
 	const { to_dos: { entities }, filter } = state
 
 	if (filter === 'completed') {
-		return entities.filter(to_do => to_do.completed)
+		return entities.filter(entities => entities.completed)
 	}
 
 	if (filter === 'uncompleted') {
-		return entities.filter(to_do => !to_do.completed)
+		return entities.filter(entities => !entities.completed)
 	}
 
 	return entities
