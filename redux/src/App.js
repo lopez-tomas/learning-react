@@ -9,8 +9,16 @@ export const asyncMiddleware = store => next => action => {
 	return next(action)
 }
 
-export const fetchThunk = () => dispatch => {
-	console.log("I'm a THUNK.", dispatch)
+export const fetchThunk = () => async dispatch => {
+	dispatch({ type: 'to-dos/pending' })
+	try {
+		const response = await fetch('https://jsonplaceholder.typicode.com/todos')
+		const data = await response.json()
+		const to_dos = data.slice(0, 10)
+		dispatch({ type: 'to-dos/fulfilled', payload: to_dos })
+	} catch(e) {
+		dispatch({ type: 'to-dos/error', error: e.message })
+	}
 }
 
 export const toDosReducer = (state = [], action) => {
@@ -27,6 +35,9 @@ export const toDosReducer = (state = [], action) => {
 				return to_do
 			})
 			return new_to_dos
+		}
+		case 'to-dos/fulfilled': {
+			return action.payload
 		}
 		default:
 			return state
