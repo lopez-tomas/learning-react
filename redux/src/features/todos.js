@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { makeFetchingReducer, makeSetReducer } from './utils'
 
 export const fetchThunk = () => async dispatch => {
 	dispatch(setPending())
@@ -49,31 +50,13 @@ export const toDosReducer = (state = [], action) => {
 	}
 }
 
-export const filterReducer = (state = 'all', action) => {
-	switch(action.type) {
-		case 'filter/set':
-			return action.payload
-		default:
-			return state
-	}
-}
+export const filterReducer = makeSetReducer(['filter/set'])
 
-const initialFetching = { loading: 'idle', error: null }
-export const fetchingReducer = (state = initialFetching, action) => {
-	switch(action.type) {
-		case 'to-dos/pending': {
-			return { ...state, loading: 'pending' }
-		}
-		case 'to-dos/fulfilled': {
-			return { ...state, loading: 'succeeded' }
-		}
-		case 'to-dos/error': {
-			return { error: action.error, loading: 'rejected' }
-		}
-		default:
-			return state
-	}
-}
+export const fetchingReducer = makeFetchingReducer([
+	'to-dos/pending',
+	'to-dos/fulfilled',
+	'to-dos/rejected',
+])
 
 export const reducer = combineReducers({
 	to_dos: combineReducers({
