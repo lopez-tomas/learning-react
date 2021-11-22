@@ -1,18 +1,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const styles = {
-	italic: {
+	id: {
 		fontStyle: 'italic',
 		color: '#ccc',
 	}
 }
 
 const Pokemon = ({ data }) => {
-	console.log(data)
+	const router = useRouter()
+	console.log(router)
+
+	// If we are using fallback = 'blocking', this is not necessary. Only use it when fallback = true
+	//if (router.isFallback) {
+		//return <p>Loading...</p>
+	//}
+
 	return (
 		<div>
-			<h1>{data.name} <span style={styles.italic}>#{data.id}</span></h1>
+			<h1>{data.name} <span style={styles.id}>#{data.id}</span></h1>
 			<Image src={data.sprites.front_default} width={400} height={400} />
 			<Link href="/">Go to home</Link>
 		</div>
@@ -21,9 +29,27 @@ const Pokemon = ({ data }) => {
 
 export default Pokemon
 
-export const getServerSideProps = async({ params }) => {
+export const getStaticProps = async({ params }) => {
 	const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
 	const data = await response.json()
 
 	return { props: { data } }
 }
+
+export const getStaticPaths = async() => {
+	const paths = [
+		{ params: { id: '1' } },
+		{ params: { id: '2' } },
+	]
+	return {
+		paths: paths,
+		fallback: 'blocking',
+	}
+}
+
+//export const getServerSideProps = async({ params }) => {
+	//const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
+	//const data = await response.json()
+
+	//return { props: { data } }
+//}
