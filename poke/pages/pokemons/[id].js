@@ -1,7 +1,21 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
+const styles = {
+	italic: {
+		fontStyle: 'italic',
+		color: '#ccc',
+	}
+}
+
 const Pokemon = ({ data }) => {
 	console.log(data)
 	return (
-		<p>Lala</p>
+		<div>
+			<h1>{data.name} <span style={styles.italic}>#{data.id}</span></h1>
+			<Image src={data.sprites.front_default} width={400} height={400} />
+			<Link href="/">Go to home</Link>
+		</div>
 	)
 }
 
