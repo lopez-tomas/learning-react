@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import Pokemons from '../pages/index'
+import Pokemons, { getStaticProps } from '../pages/index'
 
 describe('Index', () => {
 
@@ -25,5 +25,21 @@ describe('Index', () => {
 	})
 
 	describe('getStaticProps', () => {
+		it('return pokemon', async() => {
+			global.fetch = jest.fn()
+				.mockImplementation(url => {
+					expect(url).toBe('https://pokeapi.co/api/v2/pokemon?limit=151')
+					console.log(url)
+					return new Promise(resolve => {
+						resolve({
+							json: () => Promise.resolve({
+								results: 'pokemon list'
+							})
+						})
+					})
+				})
+			const { props } = await getStaticProps()
+			expect(props.pokemons).toBe('pokemon list')
+		})
 	})
 })
