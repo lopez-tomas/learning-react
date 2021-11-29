@@ -1,8 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 
-import { name_styles, types_styles } from '../../styles/pokemon'
+import Types from '../../components/Pokemon/Types'
+import Stats from '../../components/Pokemon/Stats'
+import Abilities from '../../components/Pokemon/Abilities'
+
+import { name_styles } from '../../styles/pokemon'
 
 const fixName = name => {
 	if (name === 'hp') {
@@ -19,56 +23,10 @@ const fixName = name => {
 	return name__fixed
 }
 
-const Stats = ({ stats }) => {
-	return (
-		<div>
-			<h1>Base Stats</h1>
-			<ul>
-				{stats.map(stat => <li key={stat.stat.name}>{fixName(stat.stat.name)}: {stat.base_stat}</li>)}
-			</ul>
-		</div>
-	)
-}
-
-const Types = ({ types }) => {
-	return (
-		<div>
-			{types.map(type =>
-				<div key={type.type.name}>
-					<p
-						style={{...types_styles,
-							...type.type.name === 'normal' ? types_styles.normal :
-							type.type.name === 'fire' ? types_styles.fire :
-							type.type.name === 'water' ? types_styles.water :
-							type.type.name === 'grass' ? types_styles.grass :
-							type.type.name === 'electric' ? types_styles.electric :
-							type.type.name === 'ice' ? types_styles.ice :
-							type.type.name === 'fighting' ? types_styles.fighting :
-							type.type.name === 'poison' ? types_styles.poison :
-							type.type.name === 'ground' ? types_styles.ground :
-							type.type.name === 'flying' ? types_styles.flying :
-							type.type.name === 'psychic' ? types_styles.psychic :
-							type.type.name === 'bug' ? types_styles.bug :
-							type.type.name === 'rock' ? types_styles.rock :
-							type.type.name === 'ghost' ? types_styles.ghost :
-							type.type.name === 'dark' ? types_styles.dark :
-							type.type.name === 'dragon' ? types_styles.dragon :
-							type.type.name === 'steel' ? types_styles.steel :
-							type.type.name === 'fairy' ? types_styles.fairy :
-							null
-						}}
-					>
-					{fixName(type.type.name)}</p>
-				</div>
-			)}
-		</div>
-	)
-}
-
 const Pokemon = ({ data }) => {
-	const router = useRouter()
-	console.log(data)
+	//const router = useRouter()
 	//console.log(router)
+	console.log(data)
 
 	const name = fixName(data.name)
 	const image = data.sprites.other['official-artwork'].front_default
@@ -80,8 +38,20 @@ const Pokemon = ({ data }) => {
 
 	return (
 		<div>
-			<h1 style={name_styles.name}>{name} <span style={name_styles.id}>#{data.id}</span></h1>
-			<Image src={image} width={400} height={400} />
+			<div className="name__container">
+				<h1 style={name_styles.name}>{name} <span style={name_styles.id}>#{data.id}</span></h1>
+			</div>
+
+			<div className="about__container">
+				<div className="image__container">
+					<Image src={image} width={400} height={400} />
+				</div>
+				<div className="description__container">
+					<Abilities abilities={data.abilities}/>
+					<p>Description</p>
+				</div>
+			</div>
+
 			<Types types={data.types} />
 			<Stats stats={data.stats} />
 			<Link href="/">Go to home</Link>
