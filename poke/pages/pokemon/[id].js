@@ -5,7 +5,17 @@ import { useRouter } from 'next/router'
 import { styles, types_styles } from '../../styles/pokemon'
 
 const fixName = name => {
+	if (name === 'hp') {
+		return name.toUpperCase()
+	}
+	if (name === 'special-attack') {
+		return 'Special-Attack'
+	}
+	if (name === 'special-defense') {
+		return 'Special-Defense'
+	}
 	const name__fixed = (name).charAt(0).toUpperCase() + (name).slice(1)
+
 	return name__fixed
 }
 
