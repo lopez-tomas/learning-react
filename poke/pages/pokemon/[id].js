@@ -163,7 +163,7 @@ const Pokemon = ({ data }) => {
 	return (
 		<div>
 			<h1 style={styles.name}>{name} <span style={styles.id}>#{data.id}</span></h1>
-			<Image src={image} width={450} height={450} />
+			<Image src={image} width={400} height={400} />
 			<Types types={data.types} />
 			<Stats stats={data.stats} />
 			<Link href="/">Go to home</Link>
