@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { styles, types_styles } from '../../styles/pokemon'
+import { name_styles, types_styles } from '../../styles/pokemon'
 
 const fixName = name => {
 	if (name === 'hp') {
@@ -80,7 +80,7 @@ const Pokemon = ({ data }) => {
 
 	return (
 		<div>
-			<h1 style={styles.name}>{name} <span style={styles.id}>#{data.id}</span></h1>
+			<h1 style={name_styles.name}>{name} <span style={name_styles.id}>#{data.id}</span></h1>
 			<Image src={image} width={400} height={400} />
 			<Types types={data.types} />
 			<Stats stats={data.stats} />

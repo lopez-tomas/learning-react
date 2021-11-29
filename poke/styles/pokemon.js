@@ -1,4 +1,4 @@
-export const styles = {
+export const name_styles = {
 	name: {
 		display: 'inline',
 		fontFamily: 'sans-serif',
