@@ -1,9 +1,10 @@
 export const name_styles = {
 	name: {
-		display: 'inline',
+		display: 'inline-block',
 		fontFamily: 'sans-serif',
 		border: '1px solid black',
 		borderRadius: '5px',
+		margin: '10px 0 0 10px',
 		padding: '5px',
 	},
 	id: {
@@ -14,7 +15,12 @@ export const name_styles = {
 }
 
 export const types_styles = {
+	display: 'inline-block',
+	fontSize: '20px',
 	color: '#fff',
+	margin: '10px 0 0 10px',
+	padding: '6px 70px',
+	borderRadius: '5px',
 
 	normal: {
 		backgroundColor: '#a4acaf',
