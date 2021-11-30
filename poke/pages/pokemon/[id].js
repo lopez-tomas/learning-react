@@ -48,7 +48,6 @@ const Pokemon = ({ data }) => {
 				</div>
 				<div className="description__container">
 					<Abilities abilities={data.abilities}/>
-					<p>Description</p>
 				</div>
 			</div>
 
