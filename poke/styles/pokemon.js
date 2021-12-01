@@ -100,7 +100,16 @@ export const types_styles = {
 
 export const abilities_styles = {
 	ability_name: {
+		display: "inline",
 		cursor: "pointer",
+	},
+
+	ability_description: {
+		fontStyle: "italic",
+	},
+
+	hidden_ability: {
+		color: "#e3e",
 	},
 
 	hide_description: {
