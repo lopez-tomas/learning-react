@@ -38,21 +38,25 @@ function Collapse(props) {
 }
 
 const Ability = ({ url }) => {
-  let ability = []
   const url__string = url.toString()
+  let description_effect = ""
 
-  ability = fetch(url__string).then(res => res.json())
+  const [description, setDescription] = useState([])
+
+  let ability = fetch(url__string).then(res => res.json())
 
   ability.then((data) => {
-    console.log(data)
+    if (data.effect_entries[0].language.name == "en") {
+      description_effect = data.effect_entries[0].effect
+    } else {
+      description_effect = data.effect_entries[1].effect
+    }
+    setDescription(description_effect)
   })
 
   return (
     <div>
-      <div>
-        {ability[0]}
-      </div>
-      <p>description of <strong>{url}</strong></p>
+      <p>{description}</p>
     </div>
   )
 }
