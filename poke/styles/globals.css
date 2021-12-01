@@ -15,19 +15,38 @@ a {
   box-sizing: border-box;
 }
 
-.name__container {
+/* index.js */
+.name__container,
+.about__container,
+.stats__container {
   display: flex;
+}
+
+.name__container {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .about__container {
-  display: flex;
   justify-content: center;
 }
 
+.image_type__container {
+  height: fit-content;
+}
+
 .description__container {
+  height: fit-content;
   width: 500px;
   height: 400px;
+  overflow: auto;
 }
+/* ####### */
+
+/* Types component */
+.type__container {
+  display: flex;
+  justify-content: center;
+}
+/* ####### */
