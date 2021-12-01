@@ -43,16 +43,19 @@ const Pokemon = ({ data }) => {
 			</div>
 
 			<div className="about__container">
-				<div className="image__container">
+				<div className="image_type__container">
 					<Image src={image} width={400} height={400} />
+					<Types types={data.types} />
 				</div>
+
 				<div className="description__container">
 					<Abilities abilities={data.abilities}/>
 				</div>
 			</div>
 
-			<Types types={data.types} />
-			<Stats stats={data.stats} />
+			<div className="stats__container">
+				<Stats stats={data.stats} />
+			</div>
 			<Link href="/">Go to home</Link>
 		</div>
 	)
