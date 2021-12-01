@@ -20,8 +20,8 @@ const Ability = ({ url, is_collapsed }) => {
   })
 
   return (
-    <div>
-      <p style={is_collapsed ? abilities_styles.hide_description : abilities_styles.show_description}>{description}</p>
+    <div style={is_collapsed ? abilities_styles.hide_description : abilities_styles.show_description}>
+      <p style={abilities_styles.ability_description}>{description}</p>
     </div>
   )
 }
@@ -35,7 +35,19 @@ const Abilities = ({ abilities }) => {
 
 			{abilities.map(ability =>
 			  <div key={ability.ability.name}>
-          <p style={abilities_styles.ability_name} onClick={() => setIsCollapsed(!isCollapsed)}>{fixName(ability.ability.name)} <span><strong>{!isCollapsed ? "v" : ">"}</strong></span></p>
+          <p
+            style={abilities_styles.ability_name}
+            onClick={() => setIsCollapsed(!isCollapsed)}
+          >{fixName(ability.ability.name)}
+            <span style={!ability.is_hidden ? {display: "none"} : null}>
+              <i style={abilities_styles.hidden_ability}> Hidden</i>
+            </span>
+            <>
+            <span style={{marginLeft: "8px"}}>
+              <strong>{!isCollapsed ? " v" : " >"}</strong>
+            </span>
+            </>
+          </p>
 
           <Ability url={ability.ability.url} is_collapsed={isCollapsed} />
 			  </div>
