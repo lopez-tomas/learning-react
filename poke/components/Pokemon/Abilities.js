@@ -30,7 +30,7 @@ const Abilities = ({ abilities }) => {
   const [isCollapsed, setIsCollapsed] = useState(true)
 
 	return (
-		<div>
+    <div style={{display: "block"}}>
 			<h3>Abilities</h3>
 
 			{abilities.map(ability =>
@@ -43,8 +43,8 @@ const Abilities = ({ abilities }) => {
               <i style={abilities_styles.hidden_ability}> Hidden</i>
             </span>
             <>
-            <span style={{marginLeft: "8px"}}>
-              <strong>{!isCollapsed ? " v" : " >"}</strong>
+            <span style={{marginLeft: "10px"}}>
+              <strong>{!isCollapsed ? "v" : ">"}</strong>
             </span>
             </>
           </p>
