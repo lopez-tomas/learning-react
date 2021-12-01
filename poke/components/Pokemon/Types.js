@@ -3,9 +3,9 @@ import { types_styles } from '../../styles/pokemon'
 
 const Types = ({ types }) => {
 	return (
-		<div>
+		<div className="type__container">
 			{types.map(type =>
-			<div style={{display: 'inline'}} key={type.type.name}>
+			<div key={type.type.name}>
 					<p
 						style={{...types_styles,
 							...type.type.name === 'normal' ? types_styles.normal :
