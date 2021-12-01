@@ -18,8 +18,8 @@ export const types_styles = {
 	display: 'inline-block',
 	fontSize: '20px',
 	color: '#fff',
-	margin: '10px 0 0 10px',
-	padding: '6px 70px',
+	margin: '0 2px 0 2px',
+	padding: '6px 60px',
 	borderRadius: '5px',
 
 	normal: {
@@ -107,9 +107,11 @@ export const abilities_styles = {
 	ability_description: {
 		marginLeft: "10px",
 		fontStyle: "italic",
+		fontSize: "14px",
 	},
 
 	hidden_ability: {
+		marginLeft: "5px",
 		color: "#e3e",
 	},
 
