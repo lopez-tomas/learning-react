@@ -105,6 +105,7 @@ export const abilities_styles = {
 	},
 
 	ability_description: {
+		marginLeft: "10px",
 		fontStyle: "italic",
 	},
 
