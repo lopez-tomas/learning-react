@@ -12,9 +12,9 @@ const Ability = ({ url, is_collapsed }) => {
 
   ability.then((data) => {
     if (data.effect_entries[0].language.name == "en") {
-      description_effect = data.effect_entries[0].effect
+      description_effect = data.effect_entries[0].short_effect
     } else {
-      description_effect = data.effect_entries[1].effect
+      description_effect = data.effect_entries[1].short_effect
     }
     setDescription(description_effect)
   })
@@ -35,7 +35,7 @@ const Abilities = ({ abilities }) => {
 
 			{abilities.map(ability =>
 			  <div key={ability.ability.name}>
-          <p style={abilities_styles.ability_name} onClick={() => setIsCollapsed(!isCollapsed)}>{fixName(ability.ability.name)}</p>
+          <p style={abilities_styles.ability_name} onClick={() => setIsCollapsed(!isCollapsed)}>{fixName(ability.ability.name)} <span><strong>{!isCollapsed ? "v" : ">"}</strong></span></p>
 
           <Ability url={ability.ability.url} is_collapsed={isCollapsed} />
 			  </div>
