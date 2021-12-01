@@ -1,43 +1,8 @@
 import { fixName } from '../../pages/pokemon/[id]'
-import { useState, useEffect } from 'react'
-//import axios from 'axios'
+import { useState } from 'react'
+import { abilities_styles } from '../../styles/pokemon'
 
-function Collapse(props) {
-  const [isCollapsed, setIsCollapsed] = useState(props.collapsed);
-
-  const style = {
-    collapsed: {
-      display: "none"
-    },
-    expanded: {
-      display: "block"
-    },
-    buttonStyle: {
-      display: "block",
-      width: "100%"
-    }
-  };
-
-  return (
-    <div>
-      <button
-        style={style.buttonStyle}
-        onClick={() => setIsCollapsed(!isCollapsed)}
-      >
-        {isCollapsed ? "Show" : "Hide"} content
-      </button>
-      <div
-        className="collapse-content"
-        style={isCollapsed ? style.collapsed : style.expanded}
-        aria-expanded={isCollapsed}
-      >
-        {props.children}
-      </div>
-    </div>
-  );
-}
-
-const Ability = ({ url }) => {
+const Ability = ({ url, is_collapsed }) => {
   const url__string = url.toString()
   let description_effect = ""
 
@@ -56,22 +21,23 @@ const Ability = ({ url }) => {
 
   return (
     <div>
-      <p>{description}</p>
+      <p style={is_collapsed ? abilities_styles.hide_description : abilities_styles.show_description}>{description}</p>
     </div>
   )
 }
 
 const Abilities = ({ abilities }) => {
+  const [isCollapsed, setIsCollapsed] = useState(true)
+
 	return (
 		<div>
 			<h3>Abilities</h3>
 
 			{abilities.map(ability =>
 			  <div key={ability.ability.name}>
-			    <p>{fixName(ability.ability.name)}</p>
-				  <Collapse>
-            <Ability url={ability.ability.url} />
-				  </Collapse>
+          <p style={abilities_styles.ability_name} onClick={() => setIsCollapsed(!isCollapsed)}>{fixName(ability.ability.name)}</p>
+
+          <Ability url={ability.ability.url} is_collapsed={isCollapsed} />
 			  </div>
 			)}
 		</div>
