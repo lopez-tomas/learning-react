@@ -3,9 +3,9 @@ import { fixName } from './pokemon/[id]'
 
 const Pokemon = ({ pokemon }) => {
   const name = pokemon.name
-  const id = pokemon.url.split('/').filter(x => x).pop()
+  //const id = pokemon.url.split('/').filter(x => x).pop()
   return (
-    <li><Link href={`/pokemon/${id}`} as={`/pokemon/${name}`}>{fixName(pokemon.name)}</Link></li>
+    <li><Link href="/pokemon/[id]" as={`/pokemon/${name}`}>{fixName(pokemon.name)}</Link></li>
   )
 }
 
