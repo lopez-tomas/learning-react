@@ -97,3 +97,17 @@ export const types_styles = {
 		backgroundColor: '#fdb9e9',
 	}
 }
+
+export const abilities_styles = {
+	ability_name: {
+		cursor: "pointer",
+	},
+
+	hide_description: {
+		display: "none",
+	},
+
+	show_description: {
+		display: "block",
+	},
+}
