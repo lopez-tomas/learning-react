@@ -11,11 +11,16 @@ const Ability = ({ url, is_collapsed }) => {
   let ability = fetch(url__string).then(res => res.json())
 
   ability.then((data) => {
-    if (data.effect_entries[0].language.name == "en") {
-      description_effect = data.effect_entries[0].short_effect
+    if (data.effect_entries[0] === undefined) {
+      description_effect = data.flavor_text_entries[0].flavor_text
     } else {
-      description_effect = data.effect_entries[1].short_effect
-    }
+      if (data.effect_entries[0].language.name == "en") {
+        description_effect = data.effect_entries[0].short_effect
+      } else {
+        description_effect = data.effect_entries[1].short_effect
+      }
+    } 
+
     setDescription(description_effect)
   })
 
