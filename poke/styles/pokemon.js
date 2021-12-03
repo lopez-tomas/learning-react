@@ -15,12 +15,14 @@ export const name_styles = {
 }
 
 export const types_styles = {
-	display: 'inline-block',
-	fontSize: '20px',
-	color: '#fff',
-	margin: '0 2px 0 2px',
-	padding: '6px 60px',
-	borderRadius: '5px',
+	default: {
+		display: 'inline-block',
+		fontSize: '20px',
+		color: '#fff',
+		margin: '0 2px 0 2px',
+		padding: '6px 60px',
+		borderRadius: '5px',
+	},
 
 	normal: {
 		backgroundColor: '#a4acaf',
@@ -95,6 +97,11 @@ export const types_styles = {
 
 	fairy: {
 		backgroundColor: '#fdb9e9',
+	},
+
+	noType: {
+		color: '#000',
+		backgroundColor: '#ccc'
 	}
 }
 
